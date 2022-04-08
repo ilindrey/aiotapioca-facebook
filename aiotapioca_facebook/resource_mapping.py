@@ -1,5 +1,3 @@
-# coding: utf-8
-
 RESOURCE_MAPPING = {
     'object': {
         'resource': '{id}',
