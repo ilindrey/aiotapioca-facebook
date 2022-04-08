@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 
 try:
     from setuptools import setup
@@ -18,13 +16,20 @@ except (IOError, ImportError):
     readme = ''
 
 
-package = 'tapioca_facebook'
+package = 'aiotapioca_facebook'
+
 requirements = [
-    'tapioca-wrapper<2',
+    'aiotapioca-wrapper>=3.4.2',
     'requests-oauthlib>=0.4.2',
 ]
 test_requirements = [
-
+    "pytest>=7.0",
+    "pytest-asyncio>=0.18",
+    "aioresponses>=0.7",
+]
+dev_requirements = [
+    *test_requirements,
+    "black>=22.0",
 ]
 
 
@@ -47,22 +52,20 @@ if sys.argv[-1] == 'publish':
 
 
 setup(
-    name='tapioca-facebook',
+    name='aiotapioca-facebook',
     version=get_version(package),
     description='Facebook GraphAPI wrapper using tapioca',
     long_description=readme,
     author='Filipe Ximenes',
     author_email='filipeximenes@gmail.com',
     url='https://github.com/vintasoftware/tapioca-facebook',
-    packages=[
-        'tapioca_facebook',
-    ],
-    package_dir={'tapioca_facebook': 'tapioca_facebook'},
+    packages=[package],
+    package_dir={package: package},
     include_package_data=True,
     install_requires=requirements,
     license="BSD",
     zip_safe=False,
-    keywords='tapioca-facebook',
+    keywords='aiotapioca-facebook,aiotapioca,wrapper,facebook,api',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
@@ -71,6 +74,8 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3',
     ],
+    python_requires=">=3.6",
     test_suite='tests',
-    tests_require=test_requirements
+    tests_require=test_requirements,
+    extras_require={"dev": dev_requirements},
 )
